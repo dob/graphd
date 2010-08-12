@@ -53,9 +53,7 @@ module Graphd
       elsif !(@graph[vertex1].include?(vertex2))
         raise InvalidEdgeException, "The graph does not contain that edge"        
       end
-      puts 'now deleting ' + vertex2.to_s + ' from ' + vertex1.to_s
       @graph[vertex1].delete(vertex2)
-      puts 'now deleting ' + vertex1.to_s + ' from ' + vertex2.to_s
       @graph[vertex2].delete(vertex1)
       self
     end
