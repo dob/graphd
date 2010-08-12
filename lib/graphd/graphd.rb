@@ -19,12 +19,21 @@ module Graphd
       self
     end
 
+    def connected(vertex1, vertex2)
+      connections = @graph[vertex1]
+      return connections && connections.include?(vertex2)
+    end
+
     def to_s
       res = ""
       @graph.each_pair do |key, value|
         res += key.to_s + ": " + value.join(', ')
       end
       res
+    end
+
+    def vertex_count
+      @graph.length
     end
 
     
