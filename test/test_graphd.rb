@@ -80,6 +80,17 @@ class GraphdTest < Test::Unit::TestCase
     assert graph.neighbors(4).empty?
   end
 
+  def test_dfs
+    graph = make_graph
+    graph.add_edge(1,2).
+      add_edge(2,3).
+      add_edge(3,5).
+      add_edge(1,4)
+    #puts graph.dfs(8).to_s + " is what you get at 8"
+    assert_nil graph.dfs(8)
+    assert_equal graph.dfs(4), 4
+  end
+
 private
 
   def make_graph

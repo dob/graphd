@@ -23,6 +23,11 @@ module Graphd
       self
     end
 
+    # Return the value. Since the node is an object now just return the object itself
+    def get_node_value(node)
+      node
+    end
+
     # Tests to see if vertex1 and vertex2 are adjacent to eachother
     def adjacent(vertex1, vertex2)
       connections = @graph[vertex1]
@@ -72,9 +77,37 @@ module Graphd
       res
     end
 
+    # Perform a depth first search on the graph for the given vertex
+    def dfs(target)
+      visited = {}
+      @graph.keys.each { |key| visited[key] = false }
+      node = @graph.keys[0]
+      res = search_dfs(node, target, visited)      
+    end
+
   private
     def contains_vertex?(vertex)
       @graph[vertex] ? true : false
+    end
+
+    # Perform a depth first search algorithm
+    def search_dfs(node, target, visited)
+      return if visited[node] == true
+      #puts "Now visiting " + node.to_s
+      if node == target
+        #puts "NOW RETURNING " + node.to_s
+        return node
+      end
+      visited[node] = true
+      res = nil
+      @graph[node].each do |nabe|
+        if !visited[nabe]
+          if (res = search_dfs(nabe, target, visited)) == target
+            break
+          end
+        end
+      end
+      res
     end
 
   end
