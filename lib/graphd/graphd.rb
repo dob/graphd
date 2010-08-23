@@ -85,6 +85,24 @@ module Graphd
       res = search_dfs(node, target, visited)      
     end
 
+    # Perform a bredth first search on the graph for the given vertex
+    def bfs(target)
+      visited = {}
+      @graph.keys.each { |key| visited[key] = false }
+      node = @graph.keys[0]
+      queue = Queue.new
+      queue << node
+      while !(queue.length == 0)
+        visited[node] = true
+        puts "node is #{node}"
+        return node if node == target
+        @graph[node].each do |nabe|
+          queue << nabe unless visited[nabe] == true
+        end
+        node = queue.pop
+      end
+    end
+    
   private
     def contains_vertex?(vertex)
       @graph[vertex] ? true : false
@@ -93,11 +111,7 @@ module Graphd
     # Perform a depth first search algorithm
     def search_dfs(node, target, visited)
       return if visited[node] == true
-      #puts "Now visiting " + node.to_s
-      if node == target
-        #puts "NOW RETURNING " + node.to_s
-        return node
-      end
+      return node if node == target
       visited[node] = true
       res = nil
       @graph[node].each do |nabe|
@@ -109,6 +123,9 @@ module Graphd
       end
       res
     end
-
+  end
+  
+  def search_bfs(node, target, visited)
+    
   end
 end

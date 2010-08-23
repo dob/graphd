@@ -86,9 +86,18 @@ class GraphdTest < Test::Unit::TestCase
       add_edge(2,3).
       add_edge(3,5).
       add_edge(1,4)
-    #puts graph.dfs(8).to_s + " is what you get at 8"
     assert_nil graph.dfs(8)
     assert_equal graph.dfs(4), 4
+  end
+
+  def test_bfs
+    graph = make_graph
+    graph.add_edge(1,2).
+      add_edge(2,3).
+      add_edge(3,5).
+      add_edge(1,4)
+    assert_nil graph.bfs(8)
+    assert_equal graph.bfs(4), 4
   end
 
 private
